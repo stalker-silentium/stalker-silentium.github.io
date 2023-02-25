@@ -5,7 +5,7 @@
 <template>
   <!---- Header ---->
   <header>
-    <h1>Test 2</h1>
+    <h1>Not built!</h1>
   </header>
   <!---- Main ---->
   <main>
