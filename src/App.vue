@@ -5,7 +5,7 @@
 <template>
   <!---- Header ---->
   <header>
-    <h1>test</h1>
+    <h1>Test 2</h1>
   </header>
   <!---- Main ---->
   <main>
