@@ -17,15 +17,11 @@ import NewsArticle from './components/NewsArticle.vue';
 			<h1 class="damaged">Новости</h1>
 			<NewsArticle
 				title="Вышло обновление 2.2!"
-				content=""
+				content="eeereynsrynsernyseeereynsrynsernyseeereyns<br>rynsernyseeereynsrynsernyseeereynsrynsernyseeereynsrynsernyseeereynsrynsernyseeereynsrynsernys"
 				post_name="test"
 				images="1,2,3,4"
-			/>
-			<NewsArticle
-				title="Вышло обновление 2.2!"
-				content="Здесь всякий супер длинный контент (или нет)"
-				post_name="test"
-				images="1,2,3,4"
+				date="23.02.2023"
+				time="17:45"
 			/>
 		</section>
 	</main>

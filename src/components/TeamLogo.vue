@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <img src="/images/dap_logo.webp" alt="Logo">
+    <img loading="lazy" src="/images/dap_logo.webp" alt="Logo">
 </template>
 
 <style scoped>

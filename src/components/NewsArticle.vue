@@ -4,14 +4,15 @@ const props = defineProps({
     title: String,
     content: String,
     images: String,
-    post_name: String
+    post_name: String,
+    date: String,
+    time: String,
 })
 const images = []
 if (props.images !== undefined) { images.value = props.images.split(",") }
 const imgCount = images.value.length
 const currentSlide = ref(0)
 const animCSS = ref("")
-const staticCSS = ref("")
 const currentImage = ref("")
 if (props.images  && props.post_name) { currentImage.value = "/images/posts/"+props.post_name+"/"+images.value[currentSlide.value]+".webp" } else {animCSS.value = "display: none;"}
 function getRandomArbitrary(min, max) {
@@ -19,10 +20,6 @@ function getRandomArbitrary(min, max) {
 }
 function nextSlide() {
     if (images.value.length < 2) { return }
-    staticCSS.value = "opacity: 1;"
-    setTimeout(() => {
-        staticCSS.value = ""
-    }, getRandomArbitrary(100,300));
     animCSS.value = "opacity: 0; transition: opacity 0.3s;"
     if (currentSlide.value >= imgCount - 1) {
         currentSlide.value = 0
@@ -37,15 +34,15 @@ function nextSlide() {
     <article>
         <h2 class="title damaged">{{ title }}</h2>
         <div class="slideshow-container">
-            <img class="static" src="/images/static.gif" alt="static" :style="`${staticCSS}`">
-            <img class="slideshow reactive" :src="`${currentImage}`" @click="nextSlide">
+            <img loading="lazy" class="slideshow reactive" :src="`${currentImage}`" @click="nextSlide">
             <div :style="`${animCSS}`" class="slide-anim">
-                <img src="/images/click.webp" alt="click to">
-                <img src="/images/arrow.webp" alt="change">
-                <img src="/images/slideshow.webp" alt="slide">
+                <img loading="lazy" src="/images/click.webp" alt="click to">
+                <img loading="lazy" src="/images/arrow.webp" alt="change">
+                <img loading="lazy" src="/images/slideshow.webp" alt="slide">
             </div>
         </div>
         <p class="content" v-html="content"></p>
+        <p class="date damaged">{{ date }} | {{ time }}</p>
     </article>
 </template>
 
@@ -64,10 +61,12 @@ article {
     text-align: center;
     font-size: 2.5rem;
     margin: 0 0 1rem 0;
+    opacity: 0.85;
 }
 .content {
     font-family: Arial, Helvetica, sans-serif;
     width: 90%;
+    opacity: 0.8;
 }
 .slideshow {
     border-radius: 1rem;
@@ -104,16 +103,13 @@ article {
     margin: 0 0.5rem;
     user-select: none;
 }
-.static {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    object-fit: cover;
-    border-radius: 1rem;
-    filter: brightness(0.8);
-    pointer-events: none;
-    opacity: 0;
-    z-index: 2;
+.date {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    margin: 0;
+    align-self: flex-end;
+    border-radius: 10rem;
+    opacity: 0.6;
 }
 @media screen and (max-width: 700px) {
     article {
@@ -121,34 +117,6 @@ article {
     }
     .title {
         font-size: 2rem;
-    }
-}
-@media only screen and (hover: none) and (pointer: coarse){
-    @keyframes pan {
-        0% {
-            aspect-ratio: 0.8;
-            object-position: 0%;
-        }
-        25% {
-            object-position: 100%;
-        }
-        50% {
-            aspect-ratio: 0.8;
-            object-position: 0%;
-        }
-        75% {
-            aspect-ratio: 1.7;
-            object-position: center;
-        }
-        100% {
-            aspect-ratio: 0.8;
-            object-position: 0%;
-        }
-    }
-    
-    .slideshow, .static {
-        animation: pan 10s ease-in-out infinite;
-        object-fit: cover;
     }
 }
 </style>
