@@ -79,6 +79,10 @@ html:has(a:hover) #cursor, html:has(.reactive:hover) #cursor {
     width: 2.7rem;
 }
 
+html:has(iframe:hover) #cursor {
+    opacity: 0;
+}
+
 a {
     cursor: none;
 }

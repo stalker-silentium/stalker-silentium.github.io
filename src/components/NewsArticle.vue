@@ -4,13 +4,21 @@ const props = defineProps({
     title: String,
     content: String,
     images: String,
+    video: String,
     post_name: String,
     date: String,
     time: String,
 })
+const embedURL = ref("")
+if (props.video !== undefined) {
+    const videoURL = new URL(props.video)
+    embedURL.value = videoURL.href.replace("watch?v=","embed/")
+}
 const images = []
-if (props.images !== undefined) { images.value = props.images.split(",") }
-const imgCount = images.value.length
+if (props.images !== undefined) {
+    images.value = props.images.split(",")
+    const imgCount = images.value.length
+}
 const currentSlide = ref(0)
 const animCSS = ref("")
 const currentImage = ref("")
@@ -35,6 +43,7 @@ function nextSlide() {
         <h2 class="title damaged">{{ title }}</h2>
         <div class="slideshow-container">
             <img loading="lazy" class="slideshow reactive" :src="`${currentImage}`" @click="nextSlide">
+            <iframe class="video" :src="`${embedURL}`" frameborder="0" allowfullscreen></iframe>
             <div :style="`${animCSS}`" class="slide-anim">
                 <img loading="lazy" src="/images/click.webp" alt="click to">
                 <img loading="lazy" src="/images/arrow.webp" alt="change">
@@ -42,7 +51,7 @@ function nextSlide() {
             </div>
         </div>
         <p class="content" v-html="content"></p>
-        <p class="date damaged">{{ date }} | {{ time }}</p>
+        <p v-if="date" class="date damaged">{{ date }} | {{ time }}</p>
     </article>
 </template>
 
@@ -67,6 +76,11 @@ article {
     font-family: Arial, Helvetica, sans-serif;
     width: 90%;
     opacity: 0.8;
+}
+.video {
+    width: 100%;
+    aspect-ratio: calc(16/9);
+    border-radius: 1rem;
 }
 .slideshow {
     border-radius: 1rem;

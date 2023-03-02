@@ -13,9 +13,9 @@
 <style scoped>
 div {
     display: flex;
+    align-items: center;
 }
 a > img {
-    width: 2rem;
     height: 2rem;
     margin: 0 0.5rem;
     user-select: none;
