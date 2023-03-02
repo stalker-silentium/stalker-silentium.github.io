@@ -109,7 +109,6 @@ section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	backdrop-filter: blur(0.rem);
 }
 section > h1 {
 	font-size: 3rem;
@@ -121,5 +120,6 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+    background: rgba(15,15,15,1);
 }
 </style>

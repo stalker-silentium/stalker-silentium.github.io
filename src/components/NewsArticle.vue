@@ -58,7 +58,7 @@ function nextSlide() {
 
 <style scoped>
 article {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     width: 70vw;
     display: flex;
     flex-direction: column;
@@ -66,6 +66,7 @@ article {
     border-radius: 2rem;
     margin: 1rem 0;
     padding: 3vmin;
+	backdrop-filter: blur(0.7rem);
 }
 .title {
     text-align: center;
