@@ -3,7 +3,7 @@ import App from './App.vue'
 
 import './assets/main.css'
 
-//createApp(App).mount('#app')
+createApp(App).mount('#app')
 
 const cursor = document.getElementById("cursor")
 const moveCursor = (e) => {

@@ -13,10 +13,24 @@
     src: url(/fonts/Graffiti.otf);
 }
 
+@keyframes animateGradient {
+    0% {
+        background-position: 0%;
+    }
+    50% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: 0%;
+    }
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    background-color: rgb(15,15,15);
+    background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgb(45, 45, 45) 50%, rgba(0,0,0,1) 100%);
+    background-size: 200%;
+    animation: animateGradient 5s forwards infinite ease-in;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, a, img {

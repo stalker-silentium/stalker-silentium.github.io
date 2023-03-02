@@ -15,9 +15,10 @@ if (props.video !== undefined) {
     embedURL.value = videoURL.href.replace("watch?v=","embed/")
 }
 const images = []
+var imgCount = 0
 if (props.images !== undefined) {
     images.value = props.images.split(",")
-    const imgCount = images.value.length
+    imgCount = images.value.length
 }
 const currentSlide = ref(0)
 const animCSS = ref("")
@@ -41,9 +42,9 @@ function nextSlide() {
 <template>
     <article>
         <h2 class="title damaged">{{ title }}</h2>
-        <div class="slideshow-container">
-            <img loading="lazy" class="slideshow reactive" :src="`${currentImage}`" @click="nextSlide">
-            <iframe class="video" :src="`${embedURL}`" frameborder="0" allowfullscreen></iframe>
+        <div class="slideshow-container" @click="nextSlide">
+            <img loading="lazy" class="slideshow reactive" :src="`${currentImage}`">
+            <iframe v-if="video" class="video" :src="`${embedURL}`" frameborder="0" allowfullscreen></iframe>
             <div :style="`${animCSS}`" class="slide-anim">
                 <img loading="lazy" src="/images/click.webp" alt="click to">
                 <img loading="lazy" src="/images/arrow.webp" alt="change">
@@ -58,7 +59,7 @@ function nextSlide() {
 <style scoped>
 article {
     background-color: rgba(0, 0, 0, 0.5);
-    width: 80vw;
+    width: 70vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,6 +87,8 @@ article {
     border-radius: 1rem;
     transition: all 0.3s;
     width: 100%;
+    user-select: none;
+    pointer-events: none;
 }
 .slideshow:hover {
     filter: brightness(1.1) contrast(1.1);
