@@ -25,4 +25,8 @@ if (pickedNumber < 2) {
     video.setAttribute("src","/video.mp4")
 }
 
+if (pickedNumber < 98) {
+    video.volume = 0
+}
+
 window.addEventListener('mousemove', moveCursor)
