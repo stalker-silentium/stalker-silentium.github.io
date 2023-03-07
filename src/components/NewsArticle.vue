@@ -23,6 +23,7 @@ if (props.images !== undefined) {
 const currentSlide = ref(0)
 const animCSS = ref("")
 const currentImage = ref("")
+const slideshowCSS = ref("")
 if (props.images  && props.post_name) { currentImage.value = "/images/posts/"+props.post_name+"/"+images.value[currentSlide.value]+".webp" } else {animCSS.value = "display: none;"}
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min
@@ -30,6 +31,7 @@ function getRandomArbitrary(min, max) {
 function nextSlide() {
     if (images.value.length < 2) { return }
     animCSS.value = "opacity: 0; transition: opacity 0.3s;"
+    slideshowCSS.value = "filter: blur(1rem);"
     if (currentSlide.value >= imgCount - 1) {
         currentSlide.value = 0
     } else {
@@ -37,13 +39,16 @@ function nextSlide() {
     }
     currentImage.value = "/images/posts/"+props.post_name+"/"+images.value[currentSlide.value]+".webp"
 }
+function revealImage(event) {
+    slideshowCSS.value = ""
+}
 </script>
 
 <template>
     <article>
         <h2 class="title damaged">{{ title }}</h2>
         <div class="slideshow-container" @click="nextSlide">
-            <img loading="lazy" class="slideshow reactive" :src="`${currentImage}`">
+            <img loading="lazy" class="slideshow reactive" :src="`${currentImage}`" :style="`${slideshowCSS}`" @load="revealImage">
             <iframe v-if="video" class="video" :src="`${embedURL}`" frameborder="0" allowfullscreen></iframe>
             <div :style="`${animCSS}`" class="slide-anim">
                 <img loading="lazy" src="/images/click.webp" alt="click to">
@@ -86,10 +91,11 @@ article {
 }
 .slideshow {
     border-radius: 1rem;
-    transition: all 0.3s;
+    transition: all 0.3s, filter 0;
     width: 100%;
     user-select: none;
     pointer-events: none;
+    filter: blur(0);
 }
 .slideshow:hover {
     filter: brightness(1.1) contrast(1.1);
