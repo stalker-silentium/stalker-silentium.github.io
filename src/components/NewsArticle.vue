@@ -91,7 +91,7 @@ article {
 }
 .slideshow {
     border-radius: 1rem;
-    transition: all 0.3s, filter 0;
+    transition: all 0.3s;
     width: 100%;
     user-select: none;
     pointer-events: none;
