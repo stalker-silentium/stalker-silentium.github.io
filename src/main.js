@@ -5,16 +5,9 @@ import './assets/main.css'
 
 createApp(App).mount('#app')
 
-const cursor = document.getElementById("cursor")
 const video = document.getElementById("background")
 video.playbackRate = 1.4;
-const moveCursor = (e) => {
-    const mouseY = e.clientY;
-    const mouseX = e.clientX;
 
-    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-
-}
 const pickedNumber = Math.random() * 100
 
 if (pickedNumber < 2) {
@@ -29,4 +22,12 @@ if (pickedNumber < 98) {
     video.volume = 0
 }
 
+const cursor = document.getElementById("cursor")
+const moveCursor = (e) => {
+    const mouseY = e.clientY;
+    const mouseX = e.clientX;
+
+    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+
+}
 window.addEventListener('mousemove', moveCursor)
